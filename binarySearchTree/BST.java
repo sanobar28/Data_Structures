@@ -1,6 +1,15 @@
+/**
+ * 
+ * @author Sanobar Mujawar 
+ * Created_On: 13.06.21
+ * 
+ * Purpose: To create Binary Search Tree to perform its basic operations
+ * 
+ */
+
 package binarySearchTree;
 
-public class BST{
+public class BST {
 
 	public Node root;
 
@@ -10,6 +19,7 @@ public class BST{
 
 	/**
 	 * UC-1 To insert node data in Binary search tree
+	 * 
 	 * @param data
 	 */
 	public void insert(int data) {
@@ -49,30 +59,28 @@ public class BST{
 			}
 		}
 	}
-	
+
 	/**
 	 * UC-2 Traverse BST to get correct position of node
+	 * 
 	 * @param node
 	 */
-	 public void insertNodeAt(Node node) {  
-		  
-         //Check whether tree is empty  
-         if(root == null){  
-             System.out.println("Tree is empty");  
-             return;  
-          }  
-         else {  
- 
-             if(node.left!= null)  
-                 insertNodeAt(node.left);  
-             System.out.print(node.data + " ");  
-             if(node.right!= null)  
-                 insertNodeAt(node.right);  
- 
-         }  
-     }  
-	
-	
+	public void insertNodeAt(Node node) {
+
+		// Check whether tree is empty
+		if (root == null) {
+			System.out.println("Tree is empty");
+			return;
+		} else {
+
+			if (node.left != null)
+				insertNodeAt(node.left);
+			System.out.print(node.data + " ");
+			if (node.right != null)
+				insertNodeAt(node.right);
+
+		}
+	}
 
 	// minNode() will find out the minimum node
 	public Node minNode(Node root) {
@@ -80,6 +88,33 @@ public class BST{
 			return minNode(root.left);
 		else
 			return root;
+	}
+	
+	
+	/**
+	 * UC-3 To Recursively search node value in left and right subtrees
+	 * @param key
+	 * @return
+	 */
+
+	boolean search(int key) {
+		root = search_Recursive(root, key);
+		if (root != null)
+			return true;
+		else
+			return false;
+	}
+
+	// recursive insert function
+	Node search_Recursive(Node root, int key) {
+		// Base Cases: root is null or key is present at root
+		if (root == null || root.data == key)
+			return root;
+		// val is greater than root's key
+		if (root.data > key)
+			return search_Recursive(root.left, key);
+		// val is less than root's key
+		return search_Recursive(root.right, key);
 	}
 
 	// main
@@ -99,10 +134,13 @@ public class BST{
 		tree.insert(16);
 		tree.insert(63);
 		tree.insert(67);
+
+		System.out.println("Binary search tree after insertion:");
+		// Displays the binary tree
+		tree.insertNodeAt(tree.root);
 		
-		System.out.println("Binary search tree after insertion:");  
-        //Displays the binary tree  
-        tree.insertNodeAt(tree.root);  
-		
+		boolean search = tree.search(63);
+		System.out.println("\nNode 63 found in tree " + search);
+
 	}
 }
