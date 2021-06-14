@@ -1,36 +1,16 @@
 package binarySearchTree;
 
-class Node<T> {
+
+class Node {
 	
-	T value; // value of node
-	Node<T> right, left; // pointer to left and right sub-tree
-	
-	
-	public T getValue() {
-		return value;
-	}
+	 int data;  
+     Node left;  
+     Node right;  
 
-	public void setValue(T value) {
-		this.value = value;
-	}
-
-	public Node<T> getRight() {
-		return right;
-	}
-
-	public void setRight(Node<T> right) {
-		this.right = right;
-	}
-
-	public Node<T> getLeft() {
-		return left;
-	}
-
-	public void setLeft(Node<T> left) {
-		this.left = left;
-	}
-
-	Node(T value) {
-		this.value = value;
-	}
+     public Node(int data){  
+         //Assign data to the new node, set left and right children to null  
+         this.data = data;  
+         this.left = null;  
+         this.right = null;  
+     }  
 }

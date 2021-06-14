@@ -1,50 +1,70 @@
 package binarySearchTree;
 
-public class BST<T extends Comparable<T>> {
+public class BST{
 
-	Node<T> root;
-	Node<T> left;
-	Node<T> right;
+	public Node root;
 
-	/**
-	 * UC-1 This method inserts new node in tree
-	 * 
-	 * @param value
-	 */
-	public void insert(T value) {
-		if (isEmpty())
-			root = new Node<T>(value); // root node added
+	public BST() {
+		root = null;
 	}
 
 	/**
-	 * Checks if tree is empty or not
-	 * 
-	 * @return
+	 * UC-1 To insert node data in Binary search tree
+	 * @param data
 	 */
-	public boolean isEmpty() {
-		return (root == null) ? true : false;
+	public void insert(int data) {
+		// Create a new node
+		Node newNode = new Node(data);
+
+		// Check whether tree is empty
+		if (root == null) {
+			root = newNode;
+			return;
+		} else {
+			// current node point to root of the tree
+			Node current = root, parent = null;
+
+			while (true) {
+				// parent keep track of the parent node of current node.
+				parent = current;
+
+				// If data is less than current's data, node will be inserted to the left of
+				// tree
+				if (data < current.data) {
+					current = current.left;
+					if (current == null) {
+						parent.left = newNode;
+						return;
+					}
+				}
+				// If data is greater than current's data, node will be inserted to the right of
+				// tree
+				else {
+					current = current.right;
+					if (current == null) {
+						parent.right = newNode;
+						return;
+					}
+				}
+			}
+		}
 	}
 
-	
-	private void printTree(Node<T> node) {
-		System.out.println("Node is " + node.getValue());
-		if (node.getValue() != null)
-			printTree(node.getNext());
+	// minNode() will find out the minimum node
+	public Node minNode(Node root) {
+		if (root.left != null)
+			return minNode(root.left);
+		else
+			return root;
 	}
 
-	public void show() {
-		printTree(root);
-	}
-
-	//main
+	// main
 	public static void main(String[] args) {
 
-		BST<Integer> tree = new BST<>();
+		BST tree = new BST();
 		tree.insert(56);
 		tree.insert(30);
 		tree.insert(70);
 		
-		tree.show();
-
 	}
 }
